@@ -1,3 +1,3 @@
 # Assignment 01
-## Error 404
-Assignment 01 doesn't exist
+## Github Repo
+This repo is Assignment 01

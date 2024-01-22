@@ -9,7 +9,7 @@
 |   #   | Folder Link              | Assignment Description |
 | :---: | ------------------------ | ---------------------- |
 |   1   | [A01](./Assignments/A01) | Github Repo            |
-|   2   | A02                      | Not Created Yet        |
+|   2   | [A02](./Assignments/A02) | Establishing Comms     |
 |   3   | A03                      | Not Created Yet        |
 
 ## Lorem Ipsum
