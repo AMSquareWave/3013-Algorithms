@@ -1,3 +1,3 @@
 # Assignment 01
-## Github Repo
+### Github Repo
 This repo is Assignment 01
