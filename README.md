@@ -3,6 +3,13 @@
 #### Repo: <https://github.com/amsquarewave/3013-algorithms>
 #### Email: <amsquarewave@gmail.com>
 
+## Assignments
+|   #   | Folder Link              | Assignment Description |
+| :---: | ------------------------ | ---------------------- |
+|   1   | [A01](./Assignments/A01) | Github Repo            |
+|   2   | A02                      | Not Created Yet        |
+|   3   | A03                      | Not Created Yet        |
+
 ## Lorem Ipsum
 Have some lorem ipsum while I get set up.
 
