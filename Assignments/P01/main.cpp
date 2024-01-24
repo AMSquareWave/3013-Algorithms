@@ -30,7 +30,7 @@ class Vector {
 		front = new Vbit;
 		back = front;
 		front->data = nums[0];
-		for (int i=1; i<size, i++) {
+		for (int i=1; i<size; i++) {
 			back->next = new Vbit;
 			back->next->prev = back;
 			back = back->next;
@@ -38,7 +38,7 @@ class Vector {
 		}
 	}
 	void pushFront (int num) {
-		Vbit temp = new Vbit;
+		Vbit* temp = new Vbit;
 		temp->data = num;
 		temp->next = front;
 		front->prev = temp;
@@ -51,14 +51,14 @@ class Vector {
 		back->data = num;
 	}
 	int pullFront () {
-		Vbit temp = front;
+		Vbit* temp = front;
 		front = front->next;
 		int num = temp->data;
 		delete temp;
 		return num;
 	}
 	int pullBack() {
-		Vbit temp = back;
+		Vbit* temp = back;
 		back = back->prev;
 		int num = temp->data;
 		delete temp;
@@ -67,7 +67,7 @@ class Vector {
 	int getSize () {
 		return size;
 	}
-}
+};
 
 int main() {
 	std::fstream fin;
@@ -75,14 +75,13 @@ int main() {
 
 	fin.open("./input.dat");
 
-	while (!fin.eof) {
+	while (!fin.eof()) {
 		int temp;
 		fin >> temp;
 		victor.pushBack(temp);
 	}
 
-	std::cout << "victor's size is " << victor.getSize << "\n";
-	
+	std::cout << "victor's size is " << victor.getSize() << "\n";
 
 	return 0;
 }
