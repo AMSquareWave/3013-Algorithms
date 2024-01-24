@@ -39,22 +39,36 @@ class Vector {
 	}
 	void pushFront (int num) {
 		Vbit* temp = new Vbit;
-		temp->data = num;
-		temp->next = front;
-		front->prev = temp;
-		front = temp;
+		if (front) {
+			temp->data = num;
+			temp->next = front;
+			front->prev = temp;
+			front = temp;
+		} else {
+			front = new Vbit;
+			back = front;
+			front->data = num;
+		}
+		size++;
 	}
 	void pushBack (int num) {
-		back->next = new Vbit;
-		back->next->prev = back;
-		back = back->next;
+		if (front) {
+			back->next = new Vbit;
+			back->next->prev = back;
+			back = back->next;
+		} else {
+			front = new Vbit;
+			back = front;
+		}
 		back->data = num;
+		size++;
 	}
 	int pullFront () {
 		Vbit* temp = front;
 		front = front->next;
 		int num = temp->data;
 		delete temp;
+		size--;
 		return num;
 	}
 	int pullBack() {
@@ -62,6 +76,7 @@ class Vector {
 		back = back->prev;
 		int num = temp->data;
 		delete temp;
+		size--;
 		return num;
 	}
 	int getSize () {
@@ -82,6 +97,10 @@ int main() {
 	}
 
 	std::cout << "victor's size is " << victor.getSize() << "\n";
+
+	std::cout << "the last item in victor was " << victor.pullBack() << " and the first was " << victor.pullFront() << "\n";
+
+	std::cout << "victor's new size is " << victor.getSize() << "\n";
 
 	return 0;
 }
