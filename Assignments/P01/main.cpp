@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 // Vector monomer struct (what the Vector container will be made of)
 struct Vbit {
@@ -57,14 +58,31 @@ class Vector {
 		return num;
 	}
 	int pullBack() {
-		Vbit temp = front;
-		front = front->next;
+		Vbit temp = back;
+		back = back->prev;
 		int num = temp->data;
 		delete temp;
 		return num;
 	}
+	int getSize () {
+		return size;
+	}
 }
 
 int main() {
+	std::fstream fin;
+	Vector victor;
+
+	fin.open("./input.dat");
+
+	while (!fin.eof) {
+		int temp;
+		fin >> temp;
+		victor.pushBack(temp);
+	}
+
+	std::cout << "victor's size is " << victor.getSize << "\n";
+	
+
 	return 0;
 }
