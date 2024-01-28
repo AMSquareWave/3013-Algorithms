@@ -10,7 +10,7 @@
 | :---: | ------------------------ | ---------------------- |
 |   1   | [A01](./Assignments/A01) | Github Repo            |
 |   2   | [A02](./Assignments/A02) | Establishing Comms     |
-|   3   | A03                      | Not Created Yet        |
+|   3   | [P01](./Assignments/P01) | Placeholder Program    |
 
 ## Lorem Ipsum
 Have some lorem ipsum because why not.
