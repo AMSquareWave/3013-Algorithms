@@ -102,5 +102,7 @@ int main() {
 
 	std::cout << "victor's new size is " << victor.getSize() << "\n";
 
-	return 0;
+	fin.close();
+
+	return 0;	
 }
