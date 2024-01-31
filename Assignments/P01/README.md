@@ -4,6 +4,6 @@
 
 [This](./main.cpp) is a program that tests a "Vector" class that is built on top of a doubly linked list.
 
-It is currently a placeholder for the real first assignment.
+This is an extra credit program.
 
 <sub>help me</sub>
