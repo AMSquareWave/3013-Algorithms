@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 struct Qubit {
 	int num;
@@ -49,7 +50,8 @@ class Queue {
 
 int main() {
 	Queue testq;
-
+  std::fstream fin;
+/*
 	std::cout << "testq size = " << testq.getSize() << "\n";
 
 	testq.push(3);
@@ -65,4 +67,22 @@ int main() {
 	std::cout << "testq contents: " << x << " " << y << " " << z << "\n";
 
 	std::cout << "testq size after 3 pulls = " << testq.getSize() << "\n";
+*/
+
+  fin.open("./input.dat");
+
+  while (!fin.eof()) {
+    int temp;
+    fin >> temp;
+    testq.push(temp);
+  }
+
+  fin.close();
+  
+  std::cout << "The test queue's size is " << testq.getSize() << "\n";
+  std::cout << "The first 3 items in the test queue were ";
+  std::cout << testq.pull() << ", " << testq.pull() << ", and " << testq.pull() << "\n";
+  std::cout << "The test queue's new size is " << testq.getSize() << "\n";
+
+  return 0;
 }
