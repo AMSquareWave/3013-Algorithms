@@ -54,6 +54,9 @@ int main() {
   std::cout << "The top of the pile is " << pile.pop() << "\n";
   std::cout << "Now it's " << pile.pop() << "\n";
 
+  pile.push(21);
+  std::cout << "This time it's " << pile.pop() << "\n";
+
   return 0;
 }
 
