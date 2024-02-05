@@ -26,17 +26,33 @@ public:
   }
 
   void push(int x) {
-    container[offset++] = x;
+    if(!isFull()) {
+      container[offset++] = x;
+    } else {
+      std::cout << "Stack Full, Please pop() and Try Again.";
+    }
   }
 
   int pop() {
-    if (!isEmpty())
+    if (!isEmpty()) {
       return container[--offset];
+    } else {
+      return 0;
+    }
   }
 };
 
 int main() {
   Stack pile(10);
+
+  for (int i=1; i<=10; i++) {
+    pile.push(i);
+  }
+
+  pile.push(11);
+
+  std::cout << "The top of the pile is " << pile.pop() << "\n";
+
   return 0;
 }
 
