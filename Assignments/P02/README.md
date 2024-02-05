@@ -1,4 +1,6 @@
 # P02
-## Queue Program
+## List-based Queue
 
-this is a placeholder queue that I had done in the middle of class.
+This program implements a queue using a doubly-linked list.
+
+This is a placeholder program that I had done in the middle of class.
