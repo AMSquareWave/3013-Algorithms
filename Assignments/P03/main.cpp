@@ -29,7 +29,7 @@ public:
     if(!isFull()) {
       container[offset++] = x;
     } else {
-      std::cout << "Stack Full, Please pop() and Try Again.";
+      std::cout << "Stack Full, Please pop() and Try Again.\n";
     }
   }
 
@@ -52,6 +52,7 @@ int main() {
   pile.push(11);
 
   std::cout << "The top of the pile is " << pile.pop() << "\n";
+  std::cout << "Now it's " << pile.pop() << "\n";
 
   return 0;
 }
