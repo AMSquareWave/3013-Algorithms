@@ -1,62 +1,88 @@
 #include <iostream>
+#include <fstream>
 
-class Stack{
-private:
-  int* container;
-  int size;
-  int offset;
-public:
-  Stack(int s) {
-    container = new int[size];
-    size = s;
-    offset = 0;
-  }
-  Stack(int s, int* data) {
-    container = data;
-    size = s;
-    offset = size;
-  }
+struct Qubit {
+	int num;
+	Qubit* next;
+};
 
-  bool isFull() {
-    return offset == size;
-  }
-
-  bool isEmpty() {
-    return offset == 0;
-  }
-
-  void push(int x) {
-    if(!isFull()) {
-      container[offset++] = x;
-    } else {
-      std::cout << "Stack Full, Please pop() and Try Again.\n";
-    }
-  }
-
-  int pop() {
-    if (!isEmpty()) {
-      return container[--offset];
-    } else {
-      return 0;
-    }
-  }
+class Queue {
+	private:
+		Qubit* front;
+		Qubit* back;
+		int size;
+	public:
+	Queue() {
+		size = 0;
+		front = new Qubit;
+		back = front;
+	}
+	Queue(int x) {
+		size = 1;
+		front = new Qubit;
+		back = front;
+		back->num = x;
+	}
+	void push(int x) {
+		if (size) {
+			back->next = new Qubit;
+			back = back->next;
+		}
+		back->num = x;
+		size++;
+	}
+	int pull() {
+		if (size) {
+			Qubit* temp = front;
+			int x = front->num;
+			front = front->next;
+			delete temp;
+			size--;
+			return x;
+		} else {
+			return 0;
+		}
+	}
+	int getSize() {
+		return size;
+	}
 };
 
 int main() {
-  Stack pile(10);
+	Queue testq;
+  std::fstream fin;
+/*
+	std::cout << "testq size = " << testq.getSize() << "\n";
 
-  for (int i=1; i<=10; i++) {
-    pile.push(i);
+	testq.push(3);
+	testq.push(6);
+	testq.push(9);
+
+	std::cout << "testq size after 3 pushes = " << testq.getSize() << "\n";
+
+	int x = testq.pull();
+	int y = testq.pull();
+	int z = testq.pull();
+
+	std::cout << "testq contents: " << x << " " << y << " " << z << "\n";
+
+	std::cout << "testq size after 3 pulls = " << testq.getSize() << "\n";
+*/
+
+  fin.open("./input.dat");
+
+  while (!fin.eof()) {
+    int temp;
+    fin >> temp;
+    testq.push(temp);
   }
 
-  pile.push(11);
-
-  std::cout << "The top of the pile is " << pile.pop() << "\n";
-  std::cout << "Now it's " << pile.pop() << "\n";
-
-  pile.push(21);
-  std::cout << "This time it's " << pile.pop() << "\n";
+  fin.close();
+  
+  std::cout << "The test queue's size is " << testq.getSize() << "\n";
+  std::cout << "The first 3 items in the test queue were ";
+  std::cout << testq.pull() << ", " << testq.pull() << ", and " << testq.pull() << "\n";
+  std::cout << "The test queue's new size is " << testq.getSize() << "\n";
 
   return 0;
 }
-

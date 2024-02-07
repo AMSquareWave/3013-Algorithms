@@ -1,6 +1,6 @@
-# Program 3
-## Array-based Stack
+# Program 03
+## List-based Queue
 
-This program implements a stack using an array.
+This program implements a queue using a linked list.
 
-This is currently a placeholder for P03.
+This is a placeholder program that I had done in the middle of class.
