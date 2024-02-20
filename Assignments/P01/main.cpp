@@ -9,6 +9,11 @@ template<typename N> struct Node {
 
 template<typename B> class BST {
 public:
+void print() {
+    print(root->left);
+    std::cout << root->data << " ";
+    print(root->right);
+  }
 
 private:
   Node<B>* root;
@@ -16,7 +21,13 @@ private:
     root = nullptr;
   }
 
-  void destroyBranch (Node<B>* branch){
+  void print(Node<B>* printee) {
+    print(printee->left);
+    std::cout << printee->data << " ";
+    print(printee->right);
+  }
+
+  void destroyBranch (Node<B>& branch){
     destroyBranch(branch->left);
     destroyBranch(branch->right);
     delete branch;
