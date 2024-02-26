@@ -21,15 +21,17 @@ public:
 
   void print() {
     if(root != nullptr) {
-      rPrint(root->left);
-      std::cout << root->data << " ";
-      rPrint(root->right);
+      rPrint(root);
+      std::cout << "\n";
+    }
+    else {
+      std::cout << "root is empty\n";
     }
   }
 
   void insert(B item) {
     if (root != nullptr && item == root->data) {
-//      std::cout << "item is at root already.\n";
+      std::cout << item << " is at root\n";
       return;
     }
     if (root == nullptr) {
@@ -81,7 +83,7 @@ private:
 
   void rInsert(B item, Node<B>* branch) {
     if (branch != nullptr && item == branch->data) {
-//      std::cout << "item is duplicate\n";
+      std::cout << item << " is duplicate\n";
       return;
     }
     if (item > branch->data) {
@@ -131,6 +133,9 @@ int main() {
   numtree.insert(32);
 
   numtree.print();
+
+  numtree.insert(24);
+  numtree.insert(16);
 
   return 0;
 }
