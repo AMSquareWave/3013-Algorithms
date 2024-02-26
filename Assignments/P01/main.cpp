@@ -20,84 +20,107 @@ public:
   }
 
   void print() {
-    rPrint(root->left);
-    std::cout << root->data << " ";
-    rPrint(root->right);
+    if(root != nullptr) {
+      rPrint(root->left);
+      std::cout << root->data << " ";
+      rPrint(root->right);
+    }
   }
 
   void insert(B item) {
-    if (item == root->data) {
+    if (root != nullptr && item == root->data) {
+//      std::cout << "item is at root already.\n";
       return;
     }
     if (root == nullptr) {
+//      std::cout << "Adding item at root.\n";
       root = new Node<B>;
       root->data = item;
-    } else if (item > root->data) {
+    }
+    else if (item > root->data) {
       if (root->right == nullptr) {
+//        std::cout << "placing " << item << "\n";
+        
         root->right = new Node<B>;
         root->right->data = item;
       }
       else {
+//        std::cout << "going right\n";
         rInsert(item, root->right);
       }
     }
     else {
       if (root->left == nullptr) {
+//        std::cout << "placing " << item << "\n";
         root->left = new Node<B>;
         root->left->data = item;
       }
       else {
+//        std::cout << "going left\n";
         rInsert(item, root->left);
       }
     }
   }
 
-  void rPrint(Node<B>* printee) {
-    rPrint(printee->left);
-    std::cout << printee->data << " ";
-    rPrint(printee->right);
-  }
-
   ~BST() {
-    destroyBranch(root->left);
-    destroyBranch(root->right);
-    delete root;
+    if(root != nullptr) {
+      destroyBranch(root->left);
+      destroyBranch(root->right);
+      delete root;
+    }
   }
 
 private:
+  void rPrint(Node<B>* printee) {
+    if(printee != nullptr) {
+      rPrint(printee->left);
+      std::cout << printee->data << " ";
+      rPrint(printee->right);
+    }
+  }
+
   void rInsert(B item, Node<B>* branch) {
-    if (item == branch->data) {
+    if (branch != nullptr && item == branch->data) {
+//      std::cout << "item is duplicate\n";
       return;
     }
     if (item > branch->data) {
+//      std::cout << "placing " << item << "\n";
       if (branch->right == nullptr) {
         branch->right = new Node<B>;
         branch->right->data = item;
       }
       else {
+//        std::cout << "going right\n";
         rInsert(item, branch->right);
       }
     }
     else {
       if (branch->left == nullptr) {
+//        std::cout << "placing " << item << "\n";
         branch->left = new Node<B>;
         branch->left->data = item;
       }
       else {
+//        std::cout << "going left\n";
         rInsert(item, branch->left);
       }
     }
   }
 
   void destroyBranch (Node<B>* branch){
-    destroyBranch(branch->left);
-    destroyBranch(branch->right);
-    delete branch;
+    if(branch != nullptr) {
+      destroyBranch(branch->left);
+      destroyBranch(branch->right);
+      delete branch;
+    }
   }
 };
 
 int main() {
   BST<int> numtree;
+
+//  std::cout << "inserting numbers...\n";
 
   numtree.insert(16);
   numtree.insert(8);
