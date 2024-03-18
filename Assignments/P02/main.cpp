@@ -21,7 +21,7 @@
  * https://repl.it/@rugbyprof/getchexample#main.cpp
  */
 
-#include "./headers/ioctl.h"
+// #include "./headers/ioctl.h"
 #include "./headers/json.hpp"
 #include "./headers/mygetch.hpp"
 #include "./headers/termcolor.hpp"
@@ -233,6 +233,8 @@ int main() {
     bool deleting = false;
     bool up = false;
     bool down = false;
+    bool found = false;
+    string result;
     string temp;
     int cols = screenWidth();
     int highlight = 0;
@@ -272,7 +274,7 @@ int main() {
          << endl;
     debug();
     // While capital Z is not typed keep looping
-    while ((k = getch()) != 'Z') {
+    while ((!found) && (k = getch()) != 'Z') {
         up = false;
         down = false;
         debug();
@@ -285,9 +287,22 @@ int main() {
                 deleting = true;
             }
         }
+        // tests if enter key was pressed
+        else if (k == 10){
+            found = true;
+            result = matches[highlight];
+            result.insert(0, "./loadJsonEx ");
+
+            system(result.c_str());
+            continue;
+        }
+        // tests for an escape sequence or the escape key
         else if (k == 27) {
             deleting = false;
+            //checks if the next 2 characters are [A or [B
             if ((k = getch()) == 91 && (k = getch()) == 65 || k == 66) {
+                //changes the highlight index based on whether escape
+                //sequence matches Up or Down arrow key
                 if (k == 65) {
                     up = true;
                     highlight = (highlight-1) % matches.size();
@@ -297,7 +312,7 @@ int main() {
                     highlight = (highlight+1) % matches.size();
                     cout << termcolor::on_bright_red << termcolor::bright_white << "down" << termcolor::reset << endl;
                 }
-                sleep(1);
+                // sleep(1);
             }
         }
         else {
