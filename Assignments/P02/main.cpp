@@ -21,7 +21,7 @@
  * https://repl.it/@rugbyprof/getchexample#main.cpp
  */
 
-// #include "./headers/ioctl.h"
+#include "./headers/ioctl.h"
 #include "./headers/json.hpp"
 #include "./headers/mygetch.hpp"
 #include "./headers/termcolor.hpp"
