@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <random>
@@ -7,13 +6,14 @@ template <typename N>
 struct Node {
   public:
     N data;
+    int balance;
     Node* left;
     Node* right;
 };
 
 template <typename B>
 class BST {
-  private:
+  protected:
     Node<B>* root;
     bool empty;
 
@@ -22,18 +22,22 @@ class BST {
         return;
       } else if (node->data > data) {
         if (node->left) {
+          node->balance -= 1;
           rInsert(node->left, data);
         } else {
           node->left = new Node<B>;
+          node->left->balance = 0;
           node->left->data = data;
           node->left->left = nullptr;
           node->left->right = nullptr;
         }
       } else {
         if (node->right) {
+          node->balance += 1;
           rInsert(node->right, data);
         } else {
           node->right = new Node<B>;
+          node->right->balance = 0;
           node->right->data = data;
           node->right->left = nullptr;
           node->right->right = nullptr;
@@ -44,7 +48,7 @@ class BST {
     void rprint (Node<B>* node) {
       if (node) {
         rprint(node->left);
-        std::cout << node->data << '\n';
+        std::cout << node->data << ", balance = " << node->balance << '\n';
         rprint(node->right);
       }
     }
@@ -76,6 +80,18 @@ class BST {
 
     void print () {
       rprint(root);
+    }
+};
+
+template<typename B>
+class AVL: public BST<B> {
+  private:
+    void balance(Node<B>* node){
+      if (node->balance == 2) {
+        
+      } else if (node->balance == -2) {
+
+      }
     }
 };
 
