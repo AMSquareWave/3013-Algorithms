@@ -23,6 +23,7 @@
 
 #include "./headers/ioctl.h"
 #include "./headers/json.hpp"
+#include "./headers/trie.hpp"
 #include "./headers/mygetch.hpp"
 #include "./headers/termcolor.hpp"
 #include "./headers/timer.hpp"
@@ -221,10 +222,11 @@ int main() {
 
     char k; // holder for character being typed
     string key;
-    string word = "";       // var to concatenate letters to
-    vector<string> animals; // array of animal names
-    vector<string> matches; // any matches found in vector of animals
-    int loc;                // location of substring to change its color
+    string word = "";         // var to concatenate letters to
+    vector<string> animals;   // array of animal names
+    TrieTree dictionary(128); // trie of words from the dictionary
+    vector<string> matches;   // any matches found in vector of animals
+    int loc;                  // location of substring to change its color
     string title = "GETCH WORD LOOKUP";
     string resultsLabel = "RESULTS:";
     string line;
@@ -245,6 +247,10 @@ int main() {
     debug();
 
     animals = loadData("./data/dictionary.txt");
+
+    for (auto i=animals.begin(); i!=animals.end(); ++i) {
+      dictionary.insert(*i);
+    }
 
     T.End(); // end the current timer
 
@@ -336,7 +342,9 @@ int main() {
 
         // Find any animals in the array that partially match
         // our substr word
-        matches = partialMatch(animals, word);
+        // matches = partialMatch(animals, word);
+
+        matches = dictionary.partialMatches(word);
 
         if ((int)k != 32) { // if k is not a space print it
             key = to_string(k);
