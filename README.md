@@ -10,9 +10,9 @@
 | :---: | ------------------------ | ---------------------- |
 |   1   | [A01](./Assignments/A01) | Github Repo            |
 |   2   | [A02](./Assignments/A02) | Establishing Comms     |
-|   3   | [EC1](./Assignments/EC1) | Extra Credit           |
-|   4   | [P02](./Assignments/P02) | Autocomplete Program   |
-|   5   | [P03](./Assignments/P03) | BST Vs. AVL Tree       |
+|   3   | [OP1](./Assignments/OP1) | Vector Class           |
+|   4   | [P01](./Assignments/P01) | Autocomplete Program   |
+|   5   | [OP2](./Assignments/OP2) | BST Vs. AVL Tree       |
 
 ## Lorem Ipsum
 Have some lorem ipsum because why not.
