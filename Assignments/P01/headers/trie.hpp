@@ -1,4 +1,3 @@
-#include <iostream>
 #include <strings.h>
 #include <vector>
 #include <string>
@@ -82,14 +81,17 @@ class TrieTree {
       std::vector<std::string> results;
       TrieNode* tempNode = root;
 
+      //traverse through trie to partial string
       for(auto i=query.begin(); i!=query.end();++i){
         tempNode = tempNode->traverse(*i);
       }
 
+      //create stack and push end of partial string to stack
       std::stack<TrieNode*> traversalStack;
       traversalStack.push(tempNode);
 
       std::string stackStr = tempStr;
+      stackStr.push_back(char(tempNode->getIndex()));
 
       std::vector<TrieNode*> visited;
       visited.push_back(tempNode);
@@ -97,25 +99,23 @@ class TrieTree {
       while (!traversalStack.empty()) {
         TrieNode* stackNode = traversalStack.top();
         traversalStack.pop();
+        stackStr.push_back(char(stackNode->getIndex()));
 
-        for (auto i=visited.begin(); i!=visited.end(); ++i) {
-          if (stackNode == *i) {
+        if (stackNode->wordStatus()) {
+          results.push_back(stackStr);
+        }
+
+
+        for(auto i=visited.begin();i!=visited.end();++i) {
+          if (*i == stackNode) {
             stackStr = tempStr;
           }
         }
 
         visited.push_back(stackNode);
 
-        if (stackNode != tempNode) {
-          stackStr.push_back(char(stackNode->getIndex()));
-        }
-
-        if (stackNode->wordStatus()) {
-          results.push_back(stackStr);
-        }
-
         for (int i=alphabetSize-1; i>=0; --i) {
-          if(stackNode->traverse(i)) {
+          if(stackNode->traverse(i) != nullptr) {
             traversalStack.push(stackNode->traverse(i));
           }
         }
