@@ -1,3 +1,4 @@
+#include <iostream>
 #include <strings.h>
 #include <vector>
 #include <string>
@@ -58,14 +59,12 @@ class TrieTree {
     int alphabetSize;
 
     void rPartialMatches (std::vector<std::string>& results, TrieNode* currentNode, std::string query) {
-      if (root) {
-        if (root->wordStatus()) {
-          results.push_back(query);
-        }
-        for (int i=0; i<alphabetSize; ++i) {
-          if(currentNode->traverse(i)) {
-            rPartialMatches(results, currentNode->traverse(i), query+char(i));
-          }
+      if (currentNode->wordStatus()) {
+        results.push_back(query);
+      }
+      for (int i=0; i<alphabetSize; ++i) {
+        if(currentNode->traverse(i)) {
+          rPartialMatches(results, currentNode->traverse(i), query+char(i));
         }
       }
     }
@@ -78,7 +77,7 @@ class TrieTree {
 
     void insert (std::string word) {
       TrieNode* temp = root;
-      for (auto i=word.begin(); i!=word.end(); ++i) {
+      for (auto i=word.begin(); i!=word.end()-1; ++i) {
         if (temp->exists(*i)) {
           temp = temp->traverse(*i);
         } else {
@@ -94,9 +93,12 @@ class TrieTree {
       std::vector<std::string> results;
       TrieNode* tempNode = root;
 
-      //traverse through trie to partial string
       for(auto i=query.begin(); i!=query.end();++i){
         tempNode = tempNode->traverse(*i);
+      }
+
+      if(tempNode->wordStatus()) {
+        results.push_back(query);
       }
 
       for (int i=0; i<alphabetSize; ++i) {
