@@ -57,6 +57,17 @@ class TrieTree {
     TrieNode* root;
     int alphabetSize;
 
+    void rPartialMatches (std::vector<std::string>& results, TrieNode* currentNode, std::string query) {
+      if (root) {
+        if (root->wordStatus()) {
+          results.push_back(query);
+        }
+        for (int i=0; i<alphabetSize; ++i) {
+          rPartialMatches(results, currentNode->traverse(i), query+char(i));
+        }
+      }
+    }
+
   public:
     TrieTree (int space) {
       alphabetSize = space;
@@ -86,38 +97,8 @@ class TrieTree {
         tempNode = tempNode->traverse(*i);
       }
 
-      //create stack and push end of partial string to stack
-      std::stack<TrieNode*> traversalStack;
-      traversalStack.push(tempNode);
-
-      std::string stackStr = tempStr;
-      stackStr.push_back(char(tempNode->getIndex()));
-
-      std::vector<TrieNode*> visited;
-      visited.push_back(tempNode);
-
-      while (!traversalStack.empty()) {
-        TrieNode* stackNode = traversalStack.top();
-        traversalStack.pop();
-        stackStr.push_back(char(stackNode->getIndex()));
-
-        for(auto i=visited.begin();i!=visited.end();++i) {
-          if (*i == stackNode) {
-            stackStr = tempStr;
-          }
-        }
-
-        if (stackNode->wordStatus()) {
-          results.push_back(stackStr);
-        }
-
-        visited.push_back(stackNode);
-
-        for (int i=alphabetSize-1; i>=0; --i) {
-          if(stackNode->traverse(i) != nullptr) {
-            traversalStack.push(stackNode->traverse(i));
-          }
-        }
+      for (int i=0; i<alphabetSize; ++i) {
+        rPartialMatches(results, tempNode->traverse(i), query+char(i));
       }
 
       return results;
