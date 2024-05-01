@@ -21,9 +21,9 @@
  * https://repl.it/@rugbyprof/getchexample#main.cpp
  */
 
-#include "./headers/ioctl.h"
+#include "sys/ioctl.h"
 #include "./headers/json.hpp"
-#include "./headers/trie.hpp"
+#include "./headers/trie2.hpp"
 #include "./headers/mygetch.hpp"
 #include "./headers/termcolor.hpp"
 #include "./headers/timer.hpp"
