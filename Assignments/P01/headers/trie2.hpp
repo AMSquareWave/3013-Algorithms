@@ -63,7 +63,9 @@ class TrieTree {
           results.push_back(query);
         }
         for (int i=0; i<alphabetSize; ++i) {
-          rPartialMatches(results, currentNode->traverse(i), query+char(i));
+          if(currentNode->traverse(i)) {
+            rPartialMatches(results, currentNode->traverse(i), query+char(i));
+          }
         }
       }
     }
@@ -98,7 +100,9 @@ class TrieTree {
       }
 
       for (int i=0; i<alphabetSize; ++i) {
-        rPartialMatches(results, tempNode->traverse(i), query+char(i));
+        if(tempNode->traverse(i)) {
+          rPartialMatches(results, tempNode->traverse(i), query+char(i));
+        }
       }
 
       return results;
