@@ -1,10 +1,8 @@
-#include <iostream>
+#pragma once 
+
 #include <strings.h>
 #include <vector>
 #include <string>
-#include <stack>
-
-#pragma once
 
 class TrieNode {
   protected:
@@ -16,6 +14,7 @@ class TrieNode {
     TrieNode (int space, int index) {
       alphabetSize = space;
       alphIndex = index;
+      isWord = false;
       for(int i=0; i<space; ++i) {
         alphabet.push_back(nullptr);
       }
@@ -77,12 +76,13 @@ class TrieTree {
 
     void insert (std::string word) {
       TrieNode* temp = root;
-      for (auto i=word.begin(); i!=word.end()-1; ++i) {
+      for (auto i=word.begin(); i!=word.end(); ++i) {
         if (temp->exists(*i)) {
           temp = temp->traverse(*i);
         } else {
           temp->insert(*i);
           temp = temp->traverse(*i);
+          temp->setWordStatus(false);
         }
       }
       temp->setWordStatus(true);
